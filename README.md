@@ -17,4 +17,8 @@ You need to run the simulator as a module for the relative imports in the projec
 To add your own agent
 ---------------------
 
-Create an agent class in a file in phase1/agents, that imports from Agent. Model it after another agent (like FlipCoinAgent) to get the import syntax right. Once you've implemented your agent, make sure to add an import for it in phase1/agents/__init__.py -- otherwise, the simulator won't be able to see it.  
+Create an agent class in a file in phase1/agents, that imports from Agent. Model it after another agent (like FlipCoinAgent) to get the import syntax right. Once you've implemented your agent, make sure to add an import for it in:
+
+    phase1/agents/__init__.py
+
+Otherwise, the simulator won't be able to see it.  

@@ -129,7 +129,7 @@ def main():
         #TODO: Uncomment the agent you are simulating
 
         # Flip coin
-        agent = FlipCoinAgent("FC", seed)
+        # agent = FlipCoinAgent("FC", seed)
 
         # Half probability agent
         # agent = HalfProbAgent("HP")

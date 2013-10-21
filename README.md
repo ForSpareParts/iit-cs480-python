@@ -27,4 +27,4 @@ Create an agent class in a file in phase1/agents, that imports from Agent. Model
 
 Otherwise, the simulator won't be able to see it.
 
-Once you've ddone that, you can add it to the list of agents in simulator.py -- instantiate it like the other agents in the list.
+Once you've done that, you can add it to the list of agents in simulator.py -- instantiate it like the other agents in the list.

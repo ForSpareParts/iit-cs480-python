@@ -122,7 +122,7 @@ def main():
 
     seeds = [0, 1, 2, 3, 4, 5, 6, 7, 8, last_four_digits]
 
-    market_odds = UNFAVORABLE
+    market_odds = FAVORABLE
 
     #The average value on a given day for a given agent.
     #i.e. averages["FC"][10] to get FC's average on the eleventh day.

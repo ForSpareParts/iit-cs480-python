@@ -1,3 +1,4 @@
+from collections import OrderedDict
 from random import Random
 
 from ..agents import *
@@ -30,6 +31,7 @@ FAVORABLE = (3, 1)
 #: Debug mode. When True, shows the full trace.
 DEBUG = False
 
+
 def no_learning_case(agent, market_odds, seed=None):
     """
     Given an agent and a seed, simulates agent.
@@ -39,7 +41,7 @@ def no_learning_case(agent, market_odds, seed=None):
     Args:
         agent: Agent to simulate.
         seed: seed for the random number generator. If None/default, the system time is used.
-        """
+    """
 
     rand = Random(seed)
 
@@ -115,57 +117,52 @@ def debug_print(text):
 
 
 def main():
-    #TODO: change this to the last foru digits of your A#
+    #TODO: change this to the last four digits of your A#
     last_four_digits = 1234
 
     seeds = [0, 1, 2, 3, 4, 5, 6, 7, 8, last_four_digits]
 
-    market_odds = FAVORABLE
-    average = []
+    market_odds = UNFAVORABLE
+
+    #The average value on a given day for a given agent.
+    #i.e. averages["FC"][10] to get FC's average on the eleventh day.
+    averages = OrderedDict()
 
     for seed in seeds:
-        agent = None
+        agents = [
+            FlipCoinAgent("FC", seed),
+            HalfProbAgent("HP"),
+            PercentBeliever("PB0", 0),
+            PercentBeliever("PB25", 25),
+            PercentBeliever("PB50", 50),
+            PercentBeliever("PB75", 75),
+            PercentBeliever("PB100", 100),
+            #Agent1234("1234")
+        ]
+        for agent in agents:
+            debug_print("Simulating Agent: {}".format(agent))
 
-        #TODO: Uncomment the agent you are simulating
+            #run the simulation
+            daily_balance = no_learning_case(agent, market_odds, seed)
 
-        # Flip coin
-        # agent = FlipCoinAgent("FC", seed)
+            if not agent.id in averages:
+                averages[agent.id] = []
 
-        # Half probability agent
-        # agent = HalfProbAgent("HP")
+            for d in xrange(0, NUM_DAYS):
+                if len(averages[agent.id]) < d+1:
+                    averages[agent.id].append(0)
+                averages[agent.id][d] += daily_balance[d]/len(seeds)
 
-        # Percent Believer Agent(0)
-        # agent = PercentBeliever("PB0", 0)
-
-        # Percent Believer Agent(25)
-        # agent = PercentBeliever("PB25", 25)
-
-        # Percent Believer Agent(50)
-        # agent = PercentBeliever("PB50", 50)
-
-        # Percent Believer Agent(75)
-        # agent = PercentBeliever("PB75", 75)
-
-        # Percent Believer Agent(100)
-        # agent = PercentBeliever("PB100", 100)
-
-        # Agent1234. Your agent should have this type of constructor only.
-        # agent = Agent1234("1234")
-
-        debug_print("Simulating Agent: {}".format(agent))
-
-        #run the simulation
-        daily_balance = no_learning_case(agent, market_odds, seed)
-
-        for d in xrange(0, NUM_DAYS):
-            if len(average) < d+1:
-                average.append(0)
-            average[d] += daily_balance[d]/len(seeds)
-
-    print("Day\tAverage Balance")
+    table_header = "Day"
+    for agent_id in averages.keys():
+        table_header += "\t{}".format(agent_id)
+    print(table_header)
 
     for d in xrange(0, NUM_DAYS):
-        print("{}\t{}".format(d+1, average[d]))
+        table_row = "{}".format(d+1)
+        for agent_id in averages.keys():
+            table_row += "\t{}".format(averages[agent_id][d])
+        print(table_row)
 
 
 #invoke the "main" function when this module is run on its own

@@ -14,6 +14,10 @@ You need to run the simulator as a module for the relative imports in the projec
 
     python -m phase1.master.simulator
 
+The simulator will output the performance of all the agents as a tab-separated chart, which you should be able to open in a spreadsheet program. For convenience, you can pipe the output to a file, e.g.:
+
+    python -m phase1.master.simulator >> my_output.csv
+
 To add your own agent
 ---------------------
 
@@ -21,4 +25,6 @@ Create an agent class in a file in phase1/agents, that imports from Agent. Model
 
     phase1/agents/__init__.py
 
-Otherwise, the simulator won't be able to see it.  
+Otherwise, the simulator won't be able to see it.
+
+Once you've ddone that, you can add it to the list of agents in simulator.py -- instantiate it like the other agents in the list.

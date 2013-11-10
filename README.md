@@ -1,7 +1,7 @@
 CS480 Project
 =============
 
-This is a port of Phase 1 of the CS480 project to Python. There are a few differences between the Java and Python versions, the two most noticeable being:
+This is a port of the CS480 project to Python. There are a few differences between the Java and Python versions, the two most noticeable being:
 
 - There is no Bank class in the Python port. The point of the Bank class was to hide the Agent's balance behind a private variable, to prevent tampering. Since Python has no private variables, we might as well make the balance a property of the agent.
 
@@ -13,6 +13,10 @@ To run the project
 You need to run the simulator as a module for the relative imports in the project to work. To do that, run the following code *from the repository directory*:
 
     python -m phase1.master.simulator
+
+or, for phase 2,
+
+    python -m phase1.master.simulator path/to/data/file.csv
 
 The simulator will output the performance of all the agents as a tab-separated chart, which you should be able to open in a spreadsheet program. For convenience, you can pipe the output to a file, e.g.:
 
